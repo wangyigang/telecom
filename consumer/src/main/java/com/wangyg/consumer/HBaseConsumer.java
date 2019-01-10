@@ -1,5 +1,7 @@
 package com.wangyg.consumer;
 
+
+import com.wangyg.dao.HBaseDao;
 import com.wangyg.util.PropertiesUtil;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -28,7 +30,7 @@ public class HBaseConsumer {
         //两种方式进行转换成collection
         consumer.subscribe(Collections.singletonList(topic));
 //        consumer.subscribe(Arrays.asList(topic));
-
+         HBaseDao hBaseDao = new HBaseDao();
         //订阅后，进行消费
         while (true){
             ConsumerRecords<String, String> records = consumer.poll(100);
@@ -37,6 +39,7 @@ public class HBaseConsumer {
                 System.out.println(record.value());
 
                 //TODO--将数据传入到HBase中
+                hBaseDao.putBatch(record.value());
             }
         }
 

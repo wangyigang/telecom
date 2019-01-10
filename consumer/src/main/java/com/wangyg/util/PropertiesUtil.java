@@ -34,6 +34,4 @@ public class PropertiesUtil {
         //可以使用get()方法--或者使用getProperty()
         return properties.getProperty(keyValue);
     }
-
-
 }
