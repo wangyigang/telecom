@@ -46,7 +46,7 @@ public class HBaseDao {
             columnFamily = PropertiesUtil.getPropertiesValue("hbase.columnFamily");
             //创建名称空间
             HbaseUtil.createNamespace(namespace);
-//            //创建表
+            //创建表
             HbaseUtil.createTable(tableName, columnFamily);//表名和列名
             //创建集合容器
             putList = new ArrayList<>();
@@ -149,6 +149,5 @@ public class HBaseDao {
                 e.printStackTrace();
             }
         }
-
     }
 }

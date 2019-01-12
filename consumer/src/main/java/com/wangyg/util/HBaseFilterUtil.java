@@ -216,5 +216,4 @@ public class HBaseFilterUtil {
         filter.setLatestVersionOnly(true);
         return filter;
     }
-
 }

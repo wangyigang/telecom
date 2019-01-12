@@ -29,7 +29,6 @@ public class HBaseConsumer {
 
         //两种方式进行转换成collection
         consumer.subscribe(Collections.singletonList(topic));
-//        consumer.subscribe(Arrays.asList(topic));
          HBaseDao hBaseDao = new HBaseDao();
         //订阅后，进行消费
         while (true){

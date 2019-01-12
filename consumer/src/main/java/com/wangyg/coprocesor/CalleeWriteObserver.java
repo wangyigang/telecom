@@ -38,8 +38,6 @@ public class CalleeWriteObserver extends BaseRegionObserver {
             return ; //防御性编程
         }
 
-
-
         //获取数据
         String rowkey = Bytes.toString(put.getRow());
         //切分---         splitnum + "_" +
@@ -67,7 +65,7 @@ public class CalleeWriteObserver extends BaseRegionObserver {
         String newkey = HBaseDao.genPartitionNumber(call2, buildTime, region);
         //计算新的分区
         String newRowKey = HBaseDao.getRowKey(newkey, call2, buildTime, call1, "1", duration);
-
+        System.out.println("newRowkey"+newRowKey);
         //封装put对象
         Put newPut = new Put(Bytes.toBytes(newRowKey));
         newPut.addColumn(Bytes.toBytes(columnFamily), Bytes.toBytes("call1"), Bytes.toBytes(call2));

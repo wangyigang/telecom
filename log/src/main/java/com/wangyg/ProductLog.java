@@ -81,10 +81,10 @@ public class ProductLog {
     //随机生成通话建立时间
     private String randomDate(String startDate, String endDate) {
         //simpleDateFormat 进行格式化--以年--月--日期
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFordmat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date start = simpleDateFormat.parse(startDate);
-            Date end = simpleDateFormat.parse(endDate);
+            Date start = simpleDateFordmat.parse(startDate);
+            Date end = simpleDateFordmat.parse(endDate);
             //防御性编程
             if (start.getTime() > end.getTime()) return null;
             //
@@ -114,7 +114,7 @@ public class ProductLog {
         //格式化通话时间，使位数一致
         String durationString = new DecimalFormat("0000").format(duration);
         //通话建立时间:yyyy-MM-dd,月份：0~11，天：1~31
-        String randomDate = randomDate("2017-01-01", "2018-01-01");
+        String randomDate = randomDate("2019-01-01", "2020-01-01");
         String dateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Long.parseLong(randomDate));
 
         //拼接log日志

@@ -27,14 +27,28 @@ public class HbaseUtil {
 
             Admin admin = connection.getAdmin();
             String ns = PropertiesUtil.getPropertiesValue(namespace);
+            //使用try..catch方式获取数据
+            try {
+                NamespaceDescriptor namespaceDescriptor = NamespaceDescriptor.create(namespace).build();
+                //创建名称空间
+                admin.createNamespace(namespaceDescriptor);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("命名空间已存在...");
+                admin.close();
+                connection.close();
+                return ;
+            }
+
+
 //            try {
 //                admin.getNamespaceDescriptor(ns);
 //
 //            } catch (NamespaceNotFoundException e) {
 //                //使用namespaceDescriptor描述器.create().build()方法
-                NamespaceDescriptor namespaceDescriptor = NamespaceDescriptor.create(namespace).build();
-//                //创建名称空间
-                admin.createNamespace(namespaceDescriptor);
+//            NamespaceDescriptor namespaceDescriptor = NamespaceDescriptor.create(namespace).build();
+////                //创建名称空间
+//                admin.createNamespace(namespaceDescriptor);
 //
 //
 //                //进行关闭资源
@@ -73,7 +87,7 @@ public class HbaseUtil {
             byte[][] splitkey = getSplitKeys(Integer.parseInt(regionNum));
 
 //            //设置协处理器
-//            tableDescriptor.addCoprocessor("com.wangyg.coprocesor.CalleeWriteObserver");
+          tableDescriptor.addCoprocessor("com.wangyg.coprocesor.CalleeWriteObserver");
 
             //创建表--第一个参数HtableDescriptor 第二个参数split key：切分的键
             admin.createTable(tableDescriptor, splitkey);
