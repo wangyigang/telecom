@@ -7,17 +7,17 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class CommonDimension implements WritableComparable<CommonDimension> {
-    private contactdimension contactdimension = new contactdimension();
+    private Contactdimension contactdimension = new Contactdimension();
     private DateDimension dateDimension = new DateDimension();
 
     public CommonDimension() {
     }
 
-    public contactdimension getContactdimension() {
+    public Contactdimension getContactdimension() {
         return contactdimension;
     }
 
-    public void setContactdimension(contactdimension contactdimension) {
+    public void setContactdimension(Contactdimension contactdimension) {
         this.contactdimension = contactdimension;
     }
 
@@ -30,14 +30,14 @@ public class CommonDimension implements WritableComparable<CommonDimension> {
     }
 
     //先比较联系人是否相同--先比较联系人，在比较
-    @Override
-    public int compareTo(CommonDimension o) {
-        int compare = this.contactdimension.compareTo(o.contactdimension);
-        if(compare ==0){
-            compare = this.dateDimension.compareTo(o.dateDimension);
-        }
-        return compare;
-    }
+//    @Override
+//    public int compareTo(CommonDimension o) {
+//        int compare = this.contactdimension.compareTo(o.contactdimension);
+//        if(compare ==0){
+//            compare = this.dateDimension.compareTo(o.dateDimension);
+//        }
+//        return compare;
+//    }
 
     @Override
     public void write(DataOutput out) throws IOException {
@@ -49,5 +49,20 @@ public class CommonDimension implements WritableComparable<CommonDimension> {
     public void readFields(DataInput in) throws IOException {
         this.contactdimension.readFields(in);
         this.dateDimension.readFields(in);
+    }
+
+    @Override
+    public int compareTo(CommonDimension o) {
+        int result;
+
+        //先比较联系人是否相同
+        result = this.contactdimension.compareTo(o.contactdimension);
+
+        if (result == 0) {
+
+            //比较时间维度
+            result = this.dateDimension.compareTo(o.dateDimension);
+        }
+        return result;
     }
 }

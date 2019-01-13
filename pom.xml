@@ -12,6 +12,7 @@
         <module>log</module>
         <module>consumer</module>
         <module>analyze</module>
+        <module>web</module>
     </modules>
 
     <dependencies>

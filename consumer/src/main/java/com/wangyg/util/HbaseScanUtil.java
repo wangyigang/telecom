@@ -21,7 +21,6 @@ public class HbaseScanUtil {
     public static ArrayList<String[]> getSplitRow(String phone, String startRow, String stopRow) throws ParseException {
         ArrayList<String[]> resultList = new ArrayList<>();
 
-
         //获取格式化
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
 

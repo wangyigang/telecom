@@ -9,6 +9,7 @@
         <module name="analyze" />
         <module name="consumer" />
         <module name="log" />
+        <module name="web" />
       </profile>
     </annotationProcessing>
   </component>

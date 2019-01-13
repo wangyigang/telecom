@@ -12,12 +12,12 @@ import java.io.IOException;
  */
 
 //实现序列化和课比较
-public class DateDimension implements WritableComparable<DateDimension> {
+public class DateDimension extends BaseDimension {
     private String year;
     private String month;
     private String date;
 
-    DateDimension() {
+    public DateDimension() {
     }
 
     public String getYear() {
@@ -50,28 +50,30 @@ public class DateDimension implements WritableComparable<DateDimension> {
     }
 
     @Override
-    public int compareTo(DateDimension o) {
-        int compare = this.year.compareTo(o.year);
-        if (compare == 0) {
-            compare = this.month.compareTo(o.month);
-            if (compare == 0) {
-                compare = this.date.compareTo(o.date);
-            }
-        }
-        return compare;
-    }
-
-    @Override
     public void write(DataOutput out) throws IOException {
         out.writeUTF(this.year);
         out.writeUTF(this.month);
         out.writeUTF(this.date);
     }
 
+    //序列化，反序列化
     @Override
     public void readFields(DataInput in) throws IOException {
-        String year = in.readUTF();
-        String month = in.readUTF();
-        String date = in.readUTF();
+        this.year = in.readUTF();
+        this.month = in.readUTF();
+        this.date = in.readUTF();
+    }
+
+    @Override
+    public int compareTo(BaseDimension o) {
+        DateDimension o1 = (DateDimension) o;
+        int compare = this.year.compareTo(o1.year);
+        if (compare == 0) {
+            compare = this.month.compareTo(o1.month);
+            if (compare == 0) {
+                compare = this.date.compareTo(o1.date);
+            }
+        }
+        return compare;
     }
 }
